@@ -1,5 +1,7 @@
 import mongoose, { Schema } from "mongoose";  // Correctly importing mongoose and Schema
+import jwt from "jsonwebtoken"
 
+import bcrypt from "bcrypt"
 const userSchema = new Schema({  // Corrected to userSchema
     username: {
         type: String,
@@ -44,7 +46,25 @@ const userSchema = new Schema({  // Corrected to userSchema
     refreshToken: {
         type: String  // Optional refresh token for authentication
     }
-});
+
+    
+},{
+    timestamps:true
+}
+)
+
+userSchema.pre("save",async function (next) {
+    if (!this.isModified("Password"))return next(); {
+       this.password=bcrypt.hash(this.password,10)
+       next() 
+    }
+})
+
+userSchema.methods.isPasswordCorrect = async function (password) {
+    return await bcrypt.compare(password,this.password)
+}
+
+ 
 
 export const User = mongoose.model("User", userSchema);  // Changed 'Mongoose' to 'mongoose' and fixed schema name
  
