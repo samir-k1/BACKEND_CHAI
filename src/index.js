@@ -1,9 +1,9 @@
-import dotenv from 'dotenv';
+import dotenv from 'dotenv';``
 import mongoose from "mongoose";
 import express from "express";
 import { DB_NAME } from './constants.js';
 import connectDB from "./db/db.js";
-
+// import { app } from './app.js';
 // Load environment variables
 dotenv.config({
     path: './.env'  // Ensure the correct path to .env file

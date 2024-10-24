@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors"
-import userRouter from './routes/user.routes'
+//  import userRouter from './routes/user.routes'
+
 
 import cookieParser from "cookie-parser";
 
@@ -20,11 +21,13 @@ app.use(express.static("public"))
 
 app.use(cookieParser())
 
-import userRouter from './routes/user.routes'
+ import userRouter from './routes/user.routes.js'
+
+
 // routes import 
-app.use("/api/v1/users  ",userRouter)
+app.use("/api/v1/users/",userRouter);
 
 //http://localhost:8000/users/register
 // routes declarati on 
 
-export{app}
+export {app};
